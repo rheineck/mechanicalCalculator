@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+  --bg-primary: #2cc980;
+  --bg-tape: #101815;
+  --bg-paper: #e3e4d2;
+  --bg-keyboard: #c7c8c1;
+  --digits-color: #525252;
+  --ff-primary: "IBM Plex Mono", sans-serif;
+}
+
+body {
+  background: var(--bg-primary);
+}
+
+.tape {
+  height: 50rem;
+  width: 50rem;
+  background: var(--bg-tape);
+}
+
+.paper {
+  height: 25rem;
+  width: 25rem;
+  background: var(--bg-paper);
+}
+
+.keyboard {
+  background: var(--bg-keyboard);
+  height: 50rem;
+  width: 50rem;
+}
