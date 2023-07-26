@@ -18,13 +18,22 @@ body {
   background: var(--bg-primary);
 }
 
+button {
+  font-family: var(--ff-primary);
+  border: none;
+  background: none;
+}
+
 .tape {
+  display: flex;
+  justify-content: center;
   height: 50rem;
   width: 50rem;
   background: var(--bg-tape);
 }
 
 .paper {
+  margin-top: 25rem;
   height: 25rem;
   width: 25rem;
   background: var(--bg-paper);
@@ -34,4 +43,10 @@ body {
   background: var(--bg-keyboard);
   height: 50rem;
   width: 50rem;
+}
+
+.operator {
+  background: var(--bg-tape);
+  width: 10rem;
+  height: 5rem;
 }
