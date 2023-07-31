@@ -16,6 +16,9 @@
 
 body {
   background: var(--bg-primary);
+  display: grid;
+  grid-template-areas: "calculator operator";
+  font-family: var(--ff-primary);
 }
 
 button {
@@ -25,31 +28,85 @@ button {
   cursor: pointer;
 }
 
+.calculator {
+  grid-area: calculator;
+}
+
 .tape {
   display: flex;
   justify-content: center;
-  height: 50rem;
+  height: 30rem;
   width: 50rem;
   background: var(--bg-tape);
 }
 
 .paper {
-  margin-top: 25rem;
+  margin-top: 5rem;
   height: 25rem;
   width: 25rem;
   background: var(--bg-paper);
 }
 
 .keyboard {
+  display: grid;
+  grid-template-areas:
+    "display numbers timesButton"
+    "clear zeros timesButton";
+
   background: var(--bg-keyboard);
-  height: 50rem;
-  width: 50rem;
+  height: 15rem;
+  width: 35rem;
+}
+
+.display {
+  grid-area: display;
+  background: var(--bg-keyboard);
+  border: 1px solid var(--bg-tape);
+  border-radius: 4px;
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2.5px;
+}
+
+.display .minusIndicator {
+  height: 5px;
+  width: 8px;
+  border: 0.5px solid var(--bg-tape);
+  border-radius: 4px;
+}
+
+.clear {
+  grid-area: clear;
+  background: var(--bg-tape);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50%;
+}
+
+.clear button {
+  color: var(--bg-paper);
 }
 
 .operator {
+  grid-area: operator;
   background: var(--bg-tape);
   width: 10rem;
   height: 5rem;
+}
+
+.operator button {
+  width: 10rem;
+  height: 5rem;
+}
+
+.numbers {
+  grid-area: numbers;
+  padding: 5px;
 }
 
 .numbers button {
@@ -61,11 +118,28 @@ button {
   background: var(--bg-paper);
 }
 
+.zeros {
+  grid-area: zeros;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
 .zeros button {
   color: white;
   height: 2.5rem;
+  padding: 1rem;
   background: var(--bg-tape);
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.timesButton {
+  grid-area: timesButton;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timesButton button {
