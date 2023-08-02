@@ -11,6 +11,9 @@
   --bg-paper: #e3e4d2;
   --bg-keyboard: #c7c8c1;
   --digits-color: #525252;
+  --button-hover: #a1a1aa;
+  --button-hover-black: #27272a;
+  --display-cursor: #991b1b;
   --ff-primary: "IBM Plex Mono", sans-serif;
 }
 
@@ -18,7 +21,10 @@ body {
   background: var(--bg-primary);
   display: grid;
   grid-template-areas: "calculator operator";
+  justify-content: center;
+  align-items: center;
   font-family: var(--ff-primary);
+  margin-top: 8rem;
 }
 
 button {
@@ -73,10 +79,14 @@ button {
 }
 
 .operand button {
-  height: 20px;
-  width: 20px;
-  border-radius: 2px;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 4px;
   font-size: 1.5rem;
+}
+
+.operand button:hover {
+  background: var(--button-hover);
 }
 
 .keyboard {
@@ -114,6 +124,13 @@ button {
   border-radius: 4px;
 }
 
+.display .cursor {
+  display: none;
+  height: 8px;
+  width: 8px;
+  background: var(--display-cursor);
+}
+
 .clear {
   grid-area: clear;
   background: var(--bg-tape);
@@ -122,10 +139,18 @@ button {
   display: flex;
   flex-direction: column;
   border-radius: 50%;
+
+  margin-left: 5rem;
+  position: absolute;
+  top: 52rem;
 }
 
 .clear button {
   color: var(--bg-paper);
+}
+
+.clear:hover {
+  background: var(--button-hover-black);
 }
 
 .operator {
@@ -140,6 +165,10 @@ button {
   height: 5rem;
 }
 
+.operator button:hover {
+  background: var(--button-hover-black);
+}
+
 .numbers {
   grid-area: numbers;
   padding: 5px;
@@ -152,6 +181,10 @@ button {
   border: 1px solid var(--bg-tape);
   color: var(--bg-tape);
   background: var(--bg-paper);
+}
+
+.numbers button:hover {
+  background: var(--button-hover);
 }
 
 .zeros {
@@ -171,6 +204,10 @@ button {
   align-items: center;
 }
 
+.zeros button:hover {
+  background: var(--button-hover-black);
+}
+
 .timesButton {
   grid-area: timesButton;
   display: flex;
@@ -182,4 +219,8 @@ button {
   background: var(--bg-tape);
   height: 50px;
   width: 25px;
+}
+
+.timesButton button:hover {
+  background: var(--button-hover-black);
 }
