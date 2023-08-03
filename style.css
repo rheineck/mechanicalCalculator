@@ -59,6 +59,17 @@ button {
   height: 15rem;
   width: 15rem;
   background: var(--bg-paper);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 8px;
+  overflow-y: scroll;
+}
+
+#digits {
+  margin-right: 8px;
 }
 
 .operand {
