@@ -1,4 +1,1 @@
-import Operations from "./operations";
-
-const operations = Operations()
-
+const paper = document.querySelector('#paper')

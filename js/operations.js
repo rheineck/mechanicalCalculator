@@ -19,21 +19,21 @@ export class Operations {
     return result, minusDisplay
   }
 
-  multiply(num1) {
-    let result
-    let counter = 0
-
-    while (timesButtonClicked) {
-      result = result + num1
-      counter = counter + 1
-    }
-
-    return result, counter
+  grandTotal(result) {
+    result = 0
   }
 
-  divide(dividend, num2) {
-    let result
-    let counter = 0
+  clearAll(num1) {
+    num1 = 0
+  }
 
+  clear(num1) {
+    let number = String(num).split("").map(num1 => { return Number(num1) })
+
+    while (buttonClear === true) {
+      number.pop()
+    }
+
+    return Number(number)
   }
 }
