@@ -34,6 +34,11 @@ button {
   cursor: pointer;
 }
 
+input {
+  border: none;
+  background: none;
+}
+
 .calculator {
   border: 1px solid var(--bg-tape);
   grid-area: calculator;
@@ -66,6 +71,11 @@ button {
   align-items: flex-end;
   padding: 8px;
   overflow-y: scroll;
+}
+
+.paper input {
+  width: 14rem;
+  height: 14px;
 }
 
 #digits {

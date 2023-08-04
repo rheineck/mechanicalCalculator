@@ -12,9 +12,9 @@
 <body>
   <div class="calculator">
     <div class="tape">
-      <div class="paper" id="paper">
-        
-      </div>
+      <div class="paper">
+        <input type="text" id="paper" readonly>
+      </div>    
     </div>
     <div class="operand">
       <button>
@@ -52,7 +52,7 @@
       <div class="buttons">
         <div class="numbers">
           <div class="rowThree">
-            <button >7</button>
+            <button onclick="appendToDisplay('7')">7</button>
             <button >8</button>
             <button >9</button>
           </div>  

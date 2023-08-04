@@ -31,5 +31,5 @@ function calculate() {
 }
 
 function updateDisplay() {
-  document.getElementById("display").value = displayValue;
+  document.getElementById("paper").value = displayValue;
 }
