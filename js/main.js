@@ -1,1 +1,0 @@
-const paper = document.querySelector('#paper')
