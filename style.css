@@ -18,7 +18,7 @@
 }
 
 body {
-  background: var(--bg-primary);
+  background: #fff;
   display: grid;
   grid-template-areas: "calculator operator";
   justify-content: center;
@@ -41,6 +41,7 @@ input {
 
 .calculator {
   border: 1px solid var(--bg-tape);
+  border-radius: 8px;
   grid-area: calculator;
   display: flex;
   flex-direction: column;
@@ -48,6 +49,7 @@ input {
   width: fit-content;
 
   padding: 2rem;
+  background: var(--bg-primary);
 }
 
 .tape {

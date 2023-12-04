@@ -46,32 +46,32 @@
         <div class="one">1</div>
       </div>
       <div class="clear">
-        <button>C</button>
-        <button>CE</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="deleteLastCharacter()">CE</button>
       </div>
       <div class="buttons">
         <div class="numbers">
           <div class="rowThree">
             <button onclick="appendToDisplay('7')">7</button>
-            <button >8</button>
-            <button >9</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
           </div>  
           <div class="rowTwo">
-            <button >4</button>
-            <button >5</button>
-            <button >6</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
           </div>
           <div class="rowOne">
-            <button >1</button>
-            <button >2</button>
-            <button >3</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
           </div>
         </div>
       </div>
         <div class="zeros">
-          <button >0</button>
-          <button >00</button>
-          <button >000</button>
+          <button onclick="appendToDisplay('0')">0</button>
+          <button onclick="appendToDisplay('00')">00</button>
+          <button onclick="appendToDisplay('000')">000</button>
         </div>
         <div class="timesButton">
           X
@@ -80,7 +80,7 @@
     </div>
   </div>
   <div class="operator">
-    <button>Enter</button>
+    <button onclick="operate()">Enter</button>
   </div>
   <script src="main.js"></script>
 </body>

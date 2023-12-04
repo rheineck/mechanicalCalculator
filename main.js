@@ -1,35 +1,21 @@
-let displayValue = "";
+let calculate = (arr) => {
+  let stack = [];
+  let operands = ["/", "*", "-", "+"]
 
-function appendToDisplay(value) {
-  displayValue += value;
-  updateDisplay();
-}
+  for (let i = 0; i < arr.length; i++) {
+    if (operands.includes(arr[i])) {
+      let b = stack.pop()
+      let a = stack.pop()
 
-function operate(operator) {
-  displayValue += operator;
-  updateDisplay();
-}
+      arr[i] === "*" ? stack.push(a * b) :
+        arr[i] === "/" ? stack.push * (a / b) :
+          arr[i] === "+" ? stack.push(a + b) :
+            stack.push(a - b)
+    }
+    else stack.push(arr[i])
 
-function clearDisplay() {
-  displayValue = "";
-  updateDisplay();
-}
-
-function deleteLastCharacter() {
-  displayValue = displayValue.slice(0, -1);
-  updateDisplay();
-}
-
-function calculate() {
-  try {
-    displayValue = eval(displayValue);
-    updateDisplay();
-  } catch (error) {
-    displayValue = "Error";
-    updateDisplay();
   }
+  return stack
 }
 
-function updateDisplay() {
-  document.getElementById("paper").value = displayValue;
-}
+console.log(calculate([1, 2, 3, '+', 2, '*', '-']))
