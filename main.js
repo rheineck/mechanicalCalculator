@@ -1,3 +1,7 @@
+let number = document.querySelector('.paper').textContent
+console.log(typeof (number))
+
+
 let calculate = (arr) => {
   let stack = [];
   let operands = ["/", "*", "-", "+"]
