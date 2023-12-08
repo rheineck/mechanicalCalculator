@@ -13,8 +13,7 @@
   <div class="calculator">
     <div class="tape">
       <div class="paper">
-        0
-        <input type="text" id="paper" readonly>
+        <span id="paper" onchange="addToPaper()">0</span>
       </div>    
     </div>
     <div class="operand">
@@ -81,7 +80,7 @@
     </div>
   </div>
   <div class="operator">
-    <button onclick="operate()">Enter</button>
+    <button id="enter" onclick="addToPaper()">Enter</button>
   </div>
   <script src="main.js"></script>
 </body>
