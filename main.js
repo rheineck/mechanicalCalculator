@@ -1,50 +1,47 @@
-let paperStack = parseFloat(document.querySelector(".paper").textContent)
-let enterButton = document.getElementById("enter")
+const paper = document.querySelector(".paper");
+const inputNumber = document.querySelector("#number");
 
-let stackNumbers = [];
-let operators = ["/", "*", "-", "+"]
-let displayValue = ""
+// Operators
+const total = document.querySelector(".total");
+const minus = document.querySelector(".minus");
+const doNothing = document.querySelector(".doNothing");
+const subtotal = document.querySelector(".subtotal");
+const timesButton = document.querySelector(".timesButton");
+const enterButton = document.querySelector("#enter");
 
-// ----- Debug -----
+// Numbers
+const one = document.getElementById("one");
+const two = document.getElementById("two");
+const three = document.getElementById("three");
+const four = document.getElementById("four");
+const five = document.getElementById("five");
+const six = document.getElementById("six");
+const seven = document.getElementById("seven");
+const eight = document.getElementById("eight");
+const nine = document.getElementById("nine");
+const zero = document.getElementById("zero");
+const twoZeros = document.getElementById("twoZeros");
+const threeZeros = document.getElementById("threeZeros");
 
-console.log(calculate([1, 2, 3, '+', 2, '*', '-']))
-
-// -----------------
+let stack = [parseInt(paper.textContent)]
+let lastNumber;
 
 function addToPaper() {
-
-  stackNumbers.push(paperStack)
-
-  for (let i = 0; i < stackNumbers.length; i++) {
-    let lastNumber = document.createElement('span')
-    lastNumber.value = `${stackNumbers[i]}`
-  }
-
-  console.log(stackNumbers)
+  const paperStack = document.querySelector(".paperStack")
+  const span = document.createElement('span')
+  span.textContent = `${lastNumber}`
+  paperStack.appendChild(span)
 }
 
-function calculate(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (operators.includes(arr[i])) {
-      let b = stackNumbers.pop()
-      let a = stackNumbers.pop()
+enterButton.addEventListener("click", function () {
+  lastNumber = parseInt(inputNumber.value)
+  stack.push(lastNumber)
+  addToPaper();
+  lastNumber = 0;
+  inputNumber.value = 0;
+})
 
-      arr[i] === "*" ? stackNumbers.push(a * b) :
-        arr[i] === "/" ? stackNumbers.push * (a / b) :
-          arr[i] === "+" ? stackNumbers.push(a + b) :
-            stackNumbers.push(a - b)
-    }
-    else stackNumbers.push(arr[i])
 
-  }
-  return stackNumbers
-}
-
-function appendToDisplay(value) {
-  displayValue += value.slice(0, 10);
-  updateDisplay();
-}
-
-function updateDisplay() {
-  document.getElementById("paper").value = displayValue
+debug()
+function debug() {
 }

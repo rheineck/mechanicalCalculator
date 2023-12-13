@@ -80,6 +80,11 @@ input {
   height: 14px;
 }
 
+.paper .paperStack {
+  display: flex;
+  flex-direction: column;
+}
+
 #digits {
   margin-right: 8px;
 }

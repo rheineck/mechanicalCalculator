@@ -13,20 +13,21 @@
   <div class="calculator">
     <div class="tape">
       <div class="paper">
-        <span id="paper" onchange="addToPaper()">0</span>
+        <div class="paperStack"></div>
+        <input id="number" type="text">
       </div>    
     </div>
     <div class="operand">
-      <button>
+      <button class="total">
         *
       </button>
-      <button>
+      <button class="minus">
         -
       </button>
-      <button>
+      <button class="doNothing">
         <
       </button>
-      <button>
+      <button class="subtotal">
         &
       </button>
     </div>
@@ -46,32 +47,32 @@
         <div class="one">1</div>
       </div>
       <div class="clear">
-        <button onclick="clearDisplay()">C</button>
-        <button onclick="deleteLastCharacter()">CE</button>
+        <button>C</button>
+        <button>CE</button>
       </div>
       <div class="buttons">
         <div class="numbers">
           <div class="rowThree">
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
+            <button id="seven">7</button>
+            <button id="eight">8</button>
+            <button id="nine">9</button>
           </div>  
           <div class="rowTwo">
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
+            <button id="four">4</button>
+            <button id="five">5</button>
+            <button id="six">6</button>
           </div>
           <div class="rowOne">
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
+            <button id="one">1</button>
+            <button id="two">2</button>
+            <button id="three">3</button>
           </div>
         </div>
       </div>
         <div class="zeros">
-          <button onclick="appendToDisplay('0')">0</button>
-          <button onclick="appendToDisplay('00')">00</button>
-          <button onclick="appendToDisplay('000')">000</button>
+          <button id="zero">0</button>
+          <button id="twoZeros">00</button>
+          <button id="threeZeros">000</button>
         </div>
         <div class="timesButton">
           X
@@ -80,7 +81,7 @@
     </div>
   </div>
   <div class="operator">
-    <button id="enter" onclick="addToPaper()">Enter</button>
+    <button id="enter">Enter</button>
   </div>
   <script src="main.js"></script>
 </body>
