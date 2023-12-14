@@ -14,7 +14,7 @@
     <div class="tape">
       <div class="paper">
         <div class="paperStack"></div>
-        <input id="number" type="text">
+        <input id="number" type="text" readonly>
       </div>    
     </div>
     <div class="operand">
@@ -47,32 +47,32 @@
         <div class="one">1</div>
       </div>
       <div class="clear">
-        <button>C</button>
-        <button>CE</button>
+        <button class="clearButton">C</button>
+        <button class="CEButton">CE</button>
       </div>
       <div class="buttons">
         <div class="numbers">
           <div class="rowThree">
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
+            <button onclick="updateDisplay('7')" id="seven">7</button>
+            <button onclick="updateDisplay('8')" id="eight">8</button>
+            <button onclick="updateDisplay('9')" id="nine">9</button>
           </div>  
           <div class="rowTwo">
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
+            <button onclick="updateDisplay('4')" id="four">4</button>
+            <button onclick="updateDisplay('5')" id="five">5</button>
+            <button onclick="updateDisplay('6')" id="six">6</button>
           </div>
           <div class="rowOne">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
+            <button onclick="updateDisplay('1')" id="one">1</button>
+            <button onclick="updateDisplay('2')" id="two">2</button>
+            <button onclick="updateDisplay('3')" id="three">3</button>
           </div>
         </div>
       </div>
         <div class="zeros">
-          <button id="zero">0</button>
-          <button id="twoZeros">00</button>
-          <button id="threeZeros">000</button>
+          <button onclick="updateDisplay('0')" id="zero">0</button>
+          <button onclick="updateDisplay('00')" id="twoZeros">00</button>
+          <button onclick="updateDisplay('000')" id="threeZeros">000</button>
         </div>
         <div class="timesButton">
           X

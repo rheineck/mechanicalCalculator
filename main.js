@@ -8,6 +8,8 @@ const doNothing = document.querySelector(".doNothing");
 const subtotal = document.querySelector(".subtotal");
 const timesButton = document.querySelector(".timesButton");
 const enterButton = document.querySelector("#enter");
+const clearButton = document.querySelector('.clearButton');
+const ceButton = document.querySelector('.CEButton');
 
 // Numbers
 const one = document.getElementById("one");
@@ -23,7 +25,7 @@ const zero = document.getElementById("zero");
 const twoZeros = document.getElementById("twoZeros");
 const threeZeros = document.getElementById("threeZeros");
 
-let stack = [parseInt(paper.textContent)]
+let stack = [parseInt(paper.textContent)];
 let lastNumber;
 
 function addToPaper() {
@@ -33,15 +35,26 @@ function addToPaper() {
   paperStack.appendChild(span)
 }
 
+function updateDisplay(value) {
+  inputNumber.value += value.slice(0, 10)
+}
+
 enterButton.addEventListener("click", function () {
+  if (inputNumber.value === "") {
+    inputNumber.value = 0
+  }
   lastNumber = parseInt(inputNumber.value)
   stack.push(lastNumber)
   addToPaper();
   lastNumber = 0;
-  inputNumber.value = 0;
+  inputNumber.value = "";
 })
 
+clearButton.addEventListener("click", function () {
+  inputNumber.value = "";
+})
 
-debug()
-function debug() {
-}
+ceButton.addEventListener("click", function () {
+  let newNumber = inputNumber.value.slice(0, -1)
+  inputNumber.value = newNumber;
+})

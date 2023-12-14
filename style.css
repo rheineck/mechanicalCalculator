@@ -83,6 +83,7 @@ input {
 .paper .paperStack {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 #digits {
