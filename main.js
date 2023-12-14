@@ -27,7 +27,10 @@ const threeZeros = document.getElementById("threeZeros");
 
 let stack = [parseInt(paper.textContent)];
 let lastNumber;
+let nothingRegister;
+let clickedButton = false;
 
+// Functions
 function addToPaper() {
   const paperStack = document.querySelector(".paperStack")
   const span = document.createElement('span')
@@ -39,16 +42,22 @@ function updateDisplay(value) {
   inputNumber.value += value.slice(0, 10)
 }
 
-enterButton.addEventListener("click", function () {
-  if (inputNumber.value === "") {
-    inputNumber.value = 0
+function checkIfIsClicked(button) {
+  if (clickedButton) {
+    clickedButton = false;
+  } else {
+    clickedButton = true;
   }
-  lastNumber = parseInt(inputNumber.value)
-  stack.push(lastNumber)
-  addToPaper();
-  lastNumber = 0;
-  inputNumber.value = "";
-})
+  button.classList.toggle("selected")
+  return clickedButton
+}
+
+function addToRegister() {
+  let nothingRegister = parseInt(inputNumber.value)
+
+}
+
+// Events
 
 clearButton.addEventListener("click", function () {
   inputNumber.value = "";
@@ -58,3 +67,23 @@ ceButton.addEventListener("click", function () {
   let newNumber = inputNumber.value.slice(0, -1)
   inputNumber.value = newNumber;
 })
+
+doNothing.addEventListener("click", function () {
+  checkIfIsClicked(doNothing);
+  nothingRegister = parseInt(inputNumber.value);
+  return nothingRegister
+})
+
+enterButton.addEventListener("click", function () {
+  if (inputNumber.value === "") {
+    inputNumber.value = 0
+  }
+
+  lastNumber = parseInt(inputNumber.value)
+  stack.push(lastNumber)
+  addToPaper();
+  lastNumber = 0;
+  inputNumber.value = "";
+
+})
+

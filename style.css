@@ -10,6 +10,7 @@
   --bg-tape: #101815;
   --bg-paper: #e3e4d2;
   --bg-keyboard: #c7c8c1;
+  --bg-isNegative: #e3e4f5;
   --digits-color: #525252;
   --button-hover: #a1a1aa;
   --button-hover-black: #27272a;
@@ -114,7 +115,8 @@ input {
   font-size: 1.5rem;
 }
 
-.operand button:hover {
+.operand button:hover,
+.selected {
   background: var(--button-hover);
 }
 
@@ -151,6 +153,11 @@ input {
   width: 8px;
   border: 0.5px solid var(--bg-tape);
   border-radius: 4px;
+  background: var(--bg-tape);
+}
+
+.isNegative {
+  background-color: var(--bg-isNegative);
 }
 
 .display .cursor {
