@@ -28,7 +28,10 @@ const threeZeros = document.getElementById("threeZeros");
 let stack = [parseInt(paper.textContent)];
 let lastNumber;
 let nothingRegister;
-let clickedButton = false;
+let buttonInformation = {
+  clickedButton: false,
+  whichButton: "none"
+};
 
 // Functions
 function addToPaper() {
@@ -43,18 +46,26 @@ function updateDisplay(value) {
 }
 
 function checkIfIsClicked(button) {
+  let clickedButton = buttonInformation.clickedButton;
+  let whichButton = buttonInformation.whichButton;
   if (clickedButton) {
     clickedButton = false;
   } else {
     clickedButton = true;
   }
+  if (whichButton === "none") {
+    whichButton = button.classList[0];
+  } else {
+    whichButton = "none";
+  }
   button.classList.toggle("selected")
-  return clickedButton
+  buttonInformation.clickedButton = clickedButton;
+  buttonInformation.whichButton = whichButton;
 }
 
-function addToRegister() {
-  let nothingRegister = parseInt(inputNumber.value)
-
+function addToRegister(value) {
+  value = parseInt(inputNumber.value)
+  return value
 }
 
 // Events
@@ -70,8 +81,6 @@ ceButton.addEventListener("click", function () {
 
 doNothing.addEventListener("click", function () {
   checkIfIsClicked(doNothing);
-  nothingRegister = parseInt(inputNumber.value);
-  return nothingRegister
 })
 
 enterButton.addEventListener("click", function () {
