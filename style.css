@@ -62,6 +62,19 @@ input {
   border-radius: 8px;
 }
 
+.clearPaper {
+  background: var(--bg-keyboard);
+  height: fit-content;
+  margin: 0.5rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  position: absolute;
+}
+
+.clearPaper:hover {
+  background: var(--button-hover);
+}
+
 .paper {
   margin-top: 5rem;
   height: 15rem;

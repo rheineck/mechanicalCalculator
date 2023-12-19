@@ -1,5 +1,6 @@
 const paper = document.querySelector(".paper");
 const inputNumber = document.querySelector("#number");
+const clearPaper = document.querySelector(".clearPaper");
 
 // Operators
 const total = document.querySelector(".total");
@@ -41,6 +42,7 @@ function addToPaper(value) {
   const paperStack = document.querySelector(".paperStack")
   const span = document.createElement('span')
   span.textContent = `${value}`
+  span.classList.add("stack")
   paperStack.appendChild(span)
 }
 
@@ -83,6 +85,23 @@ function calculate(stack) {
 
 // Events
 
+clearPaper.addEventListener("click", function () {
+  // stack = [];
+  let stackNumbers = [];
+  if (stack.length <= 1) {
+    alert('Enter more numbers on stack!')
+  }
+  // const paperStack = document.querySelector(".paperStack");
+  for (let i = 0; i < stack.length; i++) {
+    stackNumbers[i] = document.querySelector(".stack");
+  }
+  stackNumbers.splice(0, stack.length)
+
+  // const stackNumbers = document.querySelector(".stack");
+  console.log(stackNumbers)
+  stack = []
+})
+
 clearButton.addEventListener("click", function () {
   inputNumber.value = "";
 })
@@ -98,6 +117,10 @@ doNothing.addEventListener("click", function () {
 
 subtotal.addEventListener("click", function () {
   checkIfIsClicked(subtotal);
+})
+
+total.addEventListener("click", function () {
+  checkIfIsClicked(total);
 })
 
 enterButton.addEventListener("click", function () {
@@ -120,11 +143,15 @@ enterButton.addEventListener("click", function () {
   } else if (whichButton === "subtotal" && clickedButton === true) {
     checkIfIsClicked(subtotal);
     addToPaper(resultRegister);
-    console.log(resultRegister)
   } else if (whichButton === "doNothing" && clickedButton === true) {
     checkIfIsClicked(doNothing);
     nothingRegister = inputNumber.value;
     addToPaper(nothingRegister);
     inputNumber.value = ""
+  } else if (whichButton === "total" && clickedButton === true) {
+    checkIfIsClicked(total);
+    addToPaper(resultRegister);
+    resultRegister = 0;
+    inputNumber.value = "";
   }
 })
