@@ -25,6 +25,7 @@ const zero = document.getElementById("zero");
 const twoZeros = document.getElementById("twoZeros");
 const threeZeros = document.getElementById("threeZeros");
 
+// Variables
 let stack = [parseInt(paper.textContent)];
 let lastNumber;
 let nothingRegister;
@@ -32,12 +33,13 @@ let buttonInformation = {
   clickedButton: false,
   whichButton: "none"
 };
+let resultRegister = 0;
 
 // Functions
-function addToPaper() {
+function addToPaper(value) {
   const paperStack = document.querySelector(".paperStack")
   const span = document.createElement('span')
-  span.textContent = `${lastNumber}`
+  span.textContent = `${value}`
   paperStack.appendChild(span)
 }
 
@@ -63,9 +65,19 @@ function checkIfIsClicked(button) {
   buttonInformation.whichButton = whichButton;
 }
 
-function addToRegister(value) {
-  value = parseInt(inputNumber.value)
-  return value
+function addToRegister(value, stack) {
+  value = parseInt(inputNumber.value);
+  stack.push(value);
+  value = 0;
+  inputNumber.value = "";
+}
+
+function calculate(stack) {
+  let result = 0;
+  for (let i = 1; i < stack.length; i++) {
+    result = result + stack[i];
+  }
+  return result
 }
 
 // Events
@@ -83,16 +95,32 @@ doNothing.addEventListener("click", function () {
   checkIfIsClicked(doNothing);
 })
 
+subtotal.addEventListener("click", function () {
+  checkIfIsClicked(subtotal);
+})
+
 enterButton.addEventListener("click", function () {
+  let whichButton = buttonInformation.whichButton;
+  let clickedButton = buttonInformation.clickedButton;
+  let resultRegister;
   if (inputNumber.value === "") {
     inputNumber.value = 0
   }
-
-  lastNumber = parseInt(inputNumber.value)
-  stack.push(lastNumber)
-  addToPaper();
-  lastNumber = 0;
-  inputNumber.value = "";
-
+  if (whichButton === "doNothing" && clickedButton === true) {
+    nothingRegister = inputNumber.value;
+    checkIfIsClicked(doNothing)
+    addToPaper(nothingRegister);
+    nothingRegister = 0;
+    inputNumber.value = "";
+  } else if (whichButton === "subtotal" && clickedButton === true) {
+    resultRegister
+  } else if (whichButton === "none" && clickedButton === false) {
+    lastNumber = parseInt(inputNumber.value);
+    stack.push(lastNumber);
+    addToPaper(lastNumber);
+    lastNumber = 0;
+    inputNumber.value = "";
+    resultRegister = calculate(stack);
+  }
 })
 
