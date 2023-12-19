@@ -34,6 +34,7 @@ let buttonInformation = {
   whichButton: "none"
 };
 let resultRegister = 0;
+let timesClickedEnterButton = 0;
 
 // Functions
 function addToPaper(value) {
@@ -74,7 +75,7 @@ function addToRegister(value, stack) {
 
 function calculate(stack) {
   let result = 0;
-  for (let i = 1; i < stack.length; i++) {
+  for (let i = 0; i < stack.length; i++) {
     result = result + stack[i];
   }
   return result
@@ -100,27 +101,30 @@ subtotal.addEventListener("click", function () {
 })
 
 enterButton.addEventListener("click", function () {
+  timesClickedEnterButton++;
   let whichButton = buttonInformation.whichButton;
   let clickedButton = buttonInformation.clickedButton;
-  let resultRegister;
-  if (inputNumber.value === "") {
-    inputNumber.value = 0
+  if (timesClickedEnterButton === 1) {
+    stack.splice(stack[0], 1)
   }
-  if (whichButton === "doNothing" && clickedButton === true) {
-    nothingRegister = inputNumber.value;
-    checkIfIsClicked(doNothing)
-    addToPaper(nothingRegister);
-    nothingRegister = 0;
-    inputNumber.value = "";
-  } else if (whichButton === "subtotal" && clickedButton === true) {
-    resultRegister
-  } else if (whichButton === "none" && clickedButton === false) {
+  if (inputNumber.value === "" && whichButton !== "subtotal") {
+    inputNumber.value = 0;
+  }
+  if (whichButton === "none" && clickedButton === false) {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToPaper(lastNumber);
     lastNumber = 0;
     inputNumber.value = "";
     resultRegister = calculate(stack);
+  } else if (whichButton === "subtotal" && clickedButton === true) {
+    checkIfIsClicked(subtotal);
+    addToPaper(resultRegister);
+    console.log(resultRegister)
+  } else if (whichButton === "doNothing" && clickedButton === true) {
+    checkIfIsClicked(doNothing);
+    nothingRegister = inputNumber.value;
+    addToPaper(nothingRegister);
+    inputNumber.value = ""
   }
 })
-
