@@ -1,6 +1,7 @@
 const paper = document.querySelector(".paper");
 const inputNumber = document.querySelector("#number");
 const clearPaper = document.querySelector(".clearPaper");
+const paperStack = document.querySelector(".paperStack");
 
 // Operators
 const total = document.querySelector(".total");
@@ -29,19 +30,20 @@ const threeZeros = document.getElementById("threeZeros");
 // Variables
 let stack = [parseInt(paper.textContent)];
 let lastNumber;
+let negativeNumber;
 let nothingRegister;
 let buttonInformation = {
   clickedButton: false,
-  whichButton: "none"
+  whichButton: "none",
+  buttonSymbol: " "
 };
 let resultRegister = 0;
 let timesClickedEnterButton = 0;
 
 // Functions
-function addToPaper(value) {
-  const paperStack = document.querySelector(".paperStack")
+function addToPaper(value, symbol) {
   const span = document.createElement('span')
-  span.textContent = `${value}`
+  span.textContent = `${value} ${symbol}`
   span.classList.add("stack")
   paperStack.appendChild(span)
 }
@@ -53,6 +55,7 @@ function updateDisplay(value) {
 function checkIfIsClicked(button) {
   let clickedButton = buttonInformation.clickedButton;
   let whichButton = buttonInformation.whichButton;
+  let buttonSymbol = buttonInformation.buttonSymbol;
   if (clickedButton) {
     clickedButton = false;
   } else {
@@ -63,9 +66,21 @@ function checkIfIsClicked(button) {
   } else {
     whichButton = "none";
   }
-  button.classList.toggle("selected")
+  if (whichButton === "doNothing") {
+    buttonSymbol = "<";
+  } else if (whichButton === "total") {
+    buttonSymbol = "*";
+  } else if (whichButton === "subtotal") {
+    buttonSymbol = "&";
+  } else if (whichButton === "minus") {
+    buttonSymbol = "-";
+  } else {
+    buttonSymbol = " ";
+  }
+  button.classList.toggle("selected");
   buttonInformation.clickedButton = clickedButton;
   buttonInformation.whichButton = whichButton;
+  buttonInformation.buttonSymbol = buttonSymbol;
 }
 
 function addToRegister(value, stack) {
@@ -86,19 +101,10 @@ function calculate(stack) {
 // Events
 
 clearPaper.addEventListener("click", function () {
-  // stack = [];
-  let stackNumbers = [];
   if (stack.length <= 1) {
     alert('Enter more numbers on stack!')
   }
-  // const paperStack = document.querySelector(".paperStack");
-  for (let i = 0; i < stack.length; i++) {
-    stackNumbers[i] = document.querySelector(".stack");
-  }
-  stackNumbers.splice(0, stack.length)
-
-  // const stackNumbers = document.querySelector(".stack");
-  console.log(stackNumbers)
+  paperStack.innerHTML = "";
   stack = []
 })
 
@@ -123,10 +129,15 @@ total.addEventListener("click", function () {
   checkIfIsClicked(total);
 })
 
+minus.addEventListener("click", function () {
+  checkIfIsClicked(minus);
+})
+
 enterButton.addEventListener("click", function () {
   timesClickedEnterButton++;
   let whichButton = buttonInformation.whichButton;
   let clickedButton = buttonInformation.clickedButton;
+  let buttonSymbol = buttonInformation.buttonSymbol;
   if (timesClickedEnterButton === 1) {
     stack.splice(stack[0], 1)
   }
@@ -136,22 +147,30 @@ enterButton.addEventListener("click", function () {
   if (whichButton === "none" && clickedButton === false) {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
-    addToPaper(lastNumber);
+    addToPaper(lastNumber, buttonSymbol);
     lastNumber = 0;
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "subtotal" && clickedButton === true) {
     checkIfIsClicked(subtotal);
-    addToPaper(resultRegister);
+    addToPaper(resultRegister, buttonSymbol);
   } else if (whichButton === "doNothing" && clickedButton === true) {
     checkIfIsClicked(doNothing);
     nothingRegister = inputNumber.value;
-    addToPaper(nothingRegister);
+    addToPaper(nothingRegister, buttonSymbol);
     inputNumber.value = ""
   } else if (whichButton === "total" && clickedButton === true) {
     checkIfIsClicked(total);
-    addToPaper(resultRegister);
+    addToPaper(resultRegister, buttonSymbol);
     resultRegister = 0;
     inputNumber.value = "";
+  } else if (whichButton === "minus" && clickedButton === true) {
+    checkIfIsClicked(minus);
+    negativeNumber = - parseInt(inputNumber.value);
+    stack.push(negativeNumber)
+    addToPaper(-negativeNumber, buttonSymbol);
+    negativeNumber = 0;
+    inputNumber.value = "";
+    resultRegister = calculate(stack);
   }
 })
