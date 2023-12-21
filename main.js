@@ -8,7 +8,7 @@ const total = document.querySelector(".total");
 const minus = document.querySelector(".minus");
 const doNothing = document.querySelector(".doNothing");
 const subtotal = document.querySelector(".subtotal");
-const timesButton = document.querySelector(".timesButton");
+const timesButton = document.querySelector(".timesButton button");
 const enterButton = document.querySelector("#enter");
 const clearButton = document.querySelector('.clearButton');
 const ceButton = document.querySelector('.CEButton');
@@ -42,14 +42,14 @@ let timesClickedEnterButton = 0;
 
 // Functions
 function addToPaper(value, symbol) {
-  const span = document.createElement('span')
-  span.textContent = `${value} ${symbol}`
-  span.classList.add("stack")
-  paperStack.appendChild(span)
+  const span = document.createElement('span');
+  span.textContent = `${value} ${symbol}`;
+  span.classList.add("stack");
+  paperStack.appendChild(span);
 }
 
 function updateDisplay(value) {
-  inputNumber.value += value.slice(0, 10)
+  inputNumber.value += value.slice(0, 10);
 }
 
 function checkIfIsClicked(button) {
@@ -133,6 +133,10 @@ minus.addEventListener("click", function () {
   checkIfIsClicked(minus);
 })
 
+timesButton.addEventListener("click", function () {
+  checkIfIsClicked(timesButton);
+})
+
 enterButton.addEventListener("click", function () {
   timesClickedEnterButton++;
   let whichButton = buttonInformation.whichButton;
@@ -172,5 +176,10 @@ enterButton.addEventListener("click", function () {
     negativeNumber = 0;
     inputNumber.value = "";
     resultRegister = calculate(stack);
+  } else if (whichButton === "timesButton" && clickedButton === true) {
+    // checkIfIsClicked(timesButton);
+    lastNumber = parseInt(inputNumber.value);
+    stack.push(lastNumber);
+    addToPaper(lastNumber, buttonSymbol);
   }
 })
