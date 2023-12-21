@@ -62,7 +62,11 @@ function checkIfIsClicked(button) {
     clickedButton = true;
   }
   if (whichButton === "none") {
-    whichButton = button.classList[0];
+    if (button === timesButton) {
+      whichButton = "timesButton";
+    } else {
+      whichButton = button.classList[0];
+    }
   } else {
     whichButton = "none";
   }
@@ -177,9 +181,9 @@ enterButton.addEventListener("click", function () {
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "timesButton" && clickedButton === true) {
-    // checkIfIsClicked(timesButton);
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToPaper(lastNumber, buttonSymbol);
+    resultRegister = calculate(stack);
   }
 })
