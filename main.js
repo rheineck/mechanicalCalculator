@@ -110,6 +110,11 @@ clearPaper.addEventListener("click", function () {
   }
   paperStack.innerHTML = "";
   stack = []
+  buttonInformation = {
+    clickedButton: false,
+    whichButton: "none",
+    buttonSymbol: " "
+  };
 })
 
 clearButton.addEventListener("click", function () {
@@ -123,21 +128,40 @@ ceButton.addEventListener("click", function () {
 
 doNothing.addEventListener("click", function () {
   checkIfIsClicked(doNothing);
+  total.classList.remove("selected");
+  subtotal.classList.remove("selected");
+  minus.classList.remove("selected");
 })
 
 subtotal.addEventListener("click", function () {
   checkIfIsClicked(subtotal);
+  doNothing.classList.remove("selected");
+  total.classList.remove("selected");
+  minus.classList.remove("selected");
 })
 
 total.addEventListener("click", function () {
+  if (timesButton.classList[0] === "selected") {
+    timesButton.classList.remove("selected");
+    checkIfIsClicked(timesButton);
+  }
   checkIfIsClicked(total);
+  subtotal.classList.remove("selected");
+  minus.classList.remove("selected");
+  doNothing.classList.remove("selected");
 })
 
 minus.addEventListener("click", function () {
   checkIfIsClicked(minus);
+  total.classList.remove("selected");
+  subtotal.classList.remove("selected");
+  doNothing.classList.remove("selected");
 })
 
 timesButton.addEventListener("click", function () {
+  if (total.classList[1] === "selected") {
+    total.classList.remove("selected");
+  }
   checkIfIsClicked(timesButton);
 })
 
@@ -170,6 +194,7 @@ enterButton.addEventListener("click", function () {
   } else if (whichButton === "total" && clickedButton === true) {
     checkIfIsClicked(total);
     addToPaper(resultRegister, buttonSymbol);
+    stack = [];
     resultRegister = 0;
     inputNumber.value = "";
   } else if (whichButton === "minus" && clickedButton === true) {
@@ -184,6 +209,7 @@ enterButton.addEventListener("click", function () {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToPaper(lastNumber, buttonSymbol);
+    lastNumber = 0;
     resultRegister = calculate(stack);
   }
 })
