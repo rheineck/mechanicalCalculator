@@ -35,7 +35,8 @@ let nothingRegister;
 let buttonInformation = {
   clickedButton: false,
   whichButton: "none",
-  buttonSymbol: " "
+  buttonSymbol: " ",
+  isTimesButton: false
 };
 let resultRegister = 0;
 let timesClickedEnterButton = 0;
@@ -56,6 +57,7 @@ function checkIfIsClicked(button) {
   let clickedButton = buttonInformation.clickedButton;
   let whichButton = buttonInformation.whichButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
+  let isTimesButton = buttonInformation.isTimesButton;
   if (clickedButton) {
     clickedButton = false;
   } else {
@@ -64,11 +66,13 @@ function checkIfIsClicked(button) {
   if (whichButton === "none") {
     if (button === timesButton) {
       whichButton = "timesButton";
+      isTimesButton = true;
     } else {
       whichButton = button.classList[0];
     }
   } else {
     whichButton = "none";
+    isTimesButton = false;
   }
   if (whichButton === "doNothing") {
     buttonSymbol = "<";
@@ -85,6 +89,7 @@ function checkIfIsClicked(button) {
   buttonInformation.clickedButton = clickedButton;
   buttonInformation.whichButton = whichButton;
   buttonInformation.buttonSymbol = buttonSymbol;
+  buttonInformation.isTimesButton = isTimesButton;
 }
 
 function addToRegister(value, stack) {
@@ -143,7 +148,12 @@ subtotal.addEventListener("click", function () {
 total.addEventListener("click", function () {
   if (timesButton.classList[0] === "selected") {
     timesButton.classList.remove("selected");
-    checkIfIsClicked(timesButton);
+    buttonInformation = {
+      clickedButton: true,
+      whichButton: "total",
+      buttonSymbol: "*",
+      isTimesButton: false
+    };
   }
   checkIfIsClicked(total);
   subtotal.classList.remove("selected");
@@ -163,6 +173,7 @@ timesButton.addEventListener("click", function () {
     total.classList.remove("selected");
   }
   checkIfIsClicked(timesButton);
+  total.classList.remove("selected")
 })
 
 enterButton.addEventListener("click", function () {
