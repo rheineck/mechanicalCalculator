@@ -40,9 +40,11 @@ let buttonInformation = {
 };
 let resultRegister = 0;
 let timesClickedEnterButton = 0;
+let elementsOnPaper = 0;
 
 // Functions
 function addToPaper(value, symbol) {
+  elementsOnPaper++;
   const span = document.createElement('span');
   span.textContent = `${value} ${symbol}`;
   span.classList.add("stack");
@@ -58,11 +60,13 @@ function checkIfIsClicked(button) {
   let whichButton = buttonInformation.whichButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
   let isTimesButton = buttonInformation.isTimesButton;
+
   if (clickedButton) {
     clickedButton = false;
   } else {
     clickedButton = true;
   }
+
   if (whichButton === "none") {
     if (button === timesButton) {
       whichButton = "timesButton";
@@ -74,6 +78,7 @@ function checkIfIsClicked(button) {
     whichButton = "none";
     isTimesButton = false;
   }
+
   if (whichButton === "doNothing") {
     buttonSymbol = "<";
   } else if (whichButton === "total") {
@@ -85,6 +90,7 @@ function checkIfIsClicked(button) {
   } else {
     buttonSymbol = " ";
   }
+
   button.classList.toggle("selected");
   buttonInformation.clickedButton = clickedButton;
   buttonInformation.whichButton = whichButton;
@@ -110,11 +116,12 @@ function calculate(stack) {
 // Events
 
 clearPaper.addEventListener("click", function () {
-  if (stack.length <= 1) {
+  if (elementsOnPaper <= 1) {
     alert('Enter more numbers on stack!')
   }
   paperStack.innerHTML = "";
-  stack = []
+  stack = [];
+  elementsOnPaper = 0;
   buttonInformation = {
     clickedButton: false,
     whichButton: "none",
@@ -139,13 +146,26 @@ doNothing.addEventListener("click", function () {
 })
 
 subtotal.addEventListener("click", function () {
-  checkIfIsClicked(subtotal);
+
+  if (timesButton.classList[0] === "selected") {
+    timesButton.classList.remove("selected");
+    buttonInformation = {
+      clickedButton: true,
+      whichButton: "subtotal",
+      buttonSymbol: "&",
+      isTimesButton: false
+    };
+  } else {
+    checkIfIsClicked(subtotal);
+  }
+
   doNothing.classList.remove("selected");
   total.classList.remove("selected");
   minus.classList.remove("selected");
 })
 
 total.addEventListener("click", function () {
+
   if (timesButton.classList[0] === "selected") {
     timesButton.classList.remove("selected");
     buttonInformation = {
@@ -154,8 +174,10 @@ total.addEventListener("click", function () {
       buttonSymbol: "*",
       isTimesButton: false
     };
+  } else {
+    checkIfIsClicked(total);
   }
-  checkIfIsClicked(total);
+
   subtotal.classList.remove("selected");
   minus.classList.remove("selected");
   doNothing.classList.remove("selected");
@@ -181,12 +203,15 @@ enterButton.addEventListener("click", function () {
   let whichButton = buttonInformation.whichButton;
   let clickedButton = buttonInformation.clickedButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
+
   if (timesClickedEnterButton === 1) {
     stack.splice(stack[0], 1)
   }
+
   if (inputNumber.value === "" && whichButton !== "subtotal") {
     inputNumber.value = 0;
   }
+
   if (whichButton === "none" && clickedButton === false) {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
