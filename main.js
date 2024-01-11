@@ -43,12 +43,15 @@ let timesClickedEnterButton = 0;
 let elementsOnPaper = 0;
 
 // Functions
-function addToPaper(value, symbol) {
+function addToTable(value, symbol) {
   elementsOnPaper++;
-  const span = document.createElement('span');
-  span.textContent = `${value} ${symbol}`;
-  span.classList.add("stack");
-  paperStack.appendChild(span);
+  const tr = document.createElement('tr')
+  tr.innerHTML = `
+      <td>${value}</td>
+      <td id="symbolRow">${symbol}</td>
+  `;
+  tr.classList.add("stack");
+  paperStack.appendChild(tr);
 }
 
 function updateDisplay(value) {
@@ -215,21 +218,21 @@ enterButton.addEventListener("click", function () {
   if (whichButton === "none" && clickedButton === false) {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
-    addToPaper(lastNumber, buttonSymbol);
+    addToTable(lastNumber, buttonSymbol);
     lastNumber = 0;
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "subtotal" && clickedButton === true) {
     checkIfIsClicked(subtotal);
-    addToPaper(resultRegister, buttonSymbol);
+    addToTable(resultRegister, buttonSymbol);
   } else if (whichButton === "doNothing" && clickedButton === true) {
     checkIfIsClicked(doNothing);
     nothingRegister = inputNumber.value;
-    addToPaper(nothingRegister, buttonSymbol);
+    addToTable(nothingRegister, buttonSymbol);
     inputNumber.value = ""
   } else if (whichButton === "total" && clickedButton === true) {
     checkIfIsClicked(total);
-    addToPaper(resultRegister, buttonSymbol);
+    addToTable(resultRegister, buttonSymbol);
     stack = [];
     resultRegister = 0;
     inputNumber.value = "";
@@ -237,14 +240,14 @@ enterButton.addEventListener("click", function () {
     checkIfIsClicked(minus);
     negativeNumber = - parseInt(inputNumber.value);
     stack.push(negativeNumber)
-    addToPaper(-negativeNumber, buttonSymbol);
+    addToTable(-negativeNumber, buttonSymbol);
     negativeNumber = 0;
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "timesButton" && clickedButton === true) {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
-    addToPaper(lastNumber, buttonSymbol);
+    addToTable(lastNumber, buttonSymbol);
     lastNumber = 0;
     resultRegister = calculate(stack);
   }

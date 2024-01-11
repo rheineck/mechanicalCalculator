@@ -15,6 +15,7 @@
   --button-hover: #a1a1aa;
   --button-hover-black: #27272a;
   --display-cursor: #991b1b;
+  --negative-digits: #993b3b;
   --ff-primary: "IBM Plex Mono", sans-serif;
 }
 
@@ -89,6 +90,10 @@ input {
   overflow-y: scroll;
 }
 
+.negativeNumber {
+  color: var(--negative-digits);
+}
+
 .paper input {
   width: 14rem;
   height: 14px;
@@ -98,6 +103,11 @@ input {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+#symbolRow {
+  width: 15px;
+  text-align: center;
 }
 
 #digits {
