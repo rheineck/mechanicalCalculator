@@ -8,6 +8,7 @@ const total = document.querySelector(".total");
 const minus = document.querySelector(".minus");
 const doNothing = document.querySelector(".doNothing");
 const subtotal = document.querySelector(".subtotal");
+const minusLock = document.querySelector(".minusLock");
 const timesButton = document.querySelector(".timesButton button");
 const enterButton = document.querySelector("#enter");
 const clearButton = document.querySelector('.clearButton');
@@ -36,13 +37,14 @@ let buttonInformation = {
   clickedButton: false,
   whichButton: "none",
   buttonSymbol: " ",
-  isTimesButton: false
+  isTimesButton: false,
+  isMinusLock: false
 };
 let resultRegister = 0;
 let timesClickedEnterButton = 0;
 let elementsOnPaper = 0;
 
-// Functions
+// Functions]
 function addToTable(value, symbol) {
   elementsOnPaper++;
   const tr = document.createElement('tr')
@@ -63,6 +65,7 @@ function checkIfIsClicked(button) {
   let whichButton = buttonInformation.whichButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
   let isTimesButton = buttonInformation.isTimesButton;
+  let isMinusLock = buttonInformation.isMinusLock;
 
   if (clickedButton) {
     clickedButton = false;
@@ -74,12 +77,17 @@ function checkIfIsClicked(button) {
     if (button === timesButton) {
       whichButton = "timesButton";
       isTimesButton = true;
-    } else {
+    } else if (button === minusLock) {
+      whichButton = button.classList[0];
+      isMinusLock = true;
+    }
+    else {
       whichButton = button.classList[0];
     }
   } else {
     whichButton = "none";
     isTimesButton = false;
+    isMinusLock = false;
   }
 
   if (whichButton === "doNothing") {
@@ -88,7 +96,7 @@ function checkIfIsClicked(button) {
     buttonSymbol = "*";
   } else if (whichButton === "subtotal") {
     buttonSymbol = "&";
-  } else if (whichButton === "minus") {
+  } else if (whichButton === "minus" || whichButton === "minusLock") {
     buttonSymbol = "-";
   } else {
     buttonSymbol = " ";
@@ -99,6 +107,7 @@ function checkIfIsClicked(button) {
   buttonInformation.whichButton = whichButton;
   buttonInformation.buttonSymbol = buttonSymbol;
   buttonInformation.isTimesButton = isTimesButton;
+  buttonInformation.isMinusLock = isMinusLock;
 }
 
 function addToRegister(value, stack) {
@@ -191,6 +200,11 @@ minus.addEventListener("click", function () {
   total.classList.remove("selected");
   subtotal.classList.remove("selected");
   doNothing.classList.remove("selected");
+})
+
+minusLock.addEventListener("click", function () {
+  checkIfIsClicked(minusLock);
+  console.log(buttonInformation);
 })
 
 timesButton.addEventListener("click", function () {

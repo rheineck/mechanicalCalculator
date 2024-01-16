@@ -114,7 +114,29 @@ input {
   margin-right: 8px;
 }
 
+.minusLock {
+  border: 1px solid black;
+  background: var(--bg-tape);
+  width: 5px;
+  height: 20px;
+  grid-area: minusLock;
+  margin-top: 5.25rem;
+  margin-left: 0.5rem;
+}
+
+.minusLock:hover {
+  background: var(--bg-keyboard);
+}
+
+.operations {
+  display: grid;
+  grid-template-areas: "operands minusLock";
+  position: relative;
+  left: 12rem;
+}
+
 .operand {
+  grid-area: operands;
   margin-top: 2rem;
   height: 9rem;
   width: 9rem;
@@ -127,8 +149,8 @@ input {
   align-content: center;
   gap: 0.8rem;
 
-  position: relative;
-  left: 12rem;
+  /* position: relative; */
+  /* left: 12rem; */
 }
 
 .operand button {
