@@ -44,7 +44,8 @@ let resultRegister = 0;
 let timesClickedEnterButton = 0;
 let elementsOnPaper = 0;
 
-// Functions]
+// Functions
+
 function addToTable(value, symbol) {
   elementsOnPaper++;
   const tr = document.createElement('tr')
@@ -77,17 +78,13 @@ function checkIfIsClicked(button) {
     if (button === timesButton) {
       whichButton = "timesButton";
       isTimesButton = true;
-    } else if (button === minusLock) {
-      whichButton = button.classList[0];
-      isMinusLock = true;
-    }
-    else {
+    } else {
       whichButton = button.classList[0];
     }
   } else {
     whichButton = "none";
     isTimesButton = false;
-    isMinusLock = false;
+    // isMinusLock = false;
   }
 
   if (whichButton === "doNothing") {
@@ -96,7 +93,7 @@ function checkIfIsClicked(button) {
     buttonSymbol = "*";
   } else if (whichButton === "subtotal") {
     buttonSymbol = "&";
-  } else if (whichButton === "minus" || whichButton === "minusLock") {
+  } else if (whichButton === "minus") {
     buttonSymbol = "-";
   } else {
     buttonSymbol = " ";
@@ -151,6 +148,11 @@ ceButton.addEventListener("click", function () {
 })
 
 doNothing.addEventListener("click", function () {
+
+  if (buttonInformation.isMinusLock === true) {
+    return
+  }
+
   checkIfIsClicked(doNothing);
   total.classList.remove("selected");
   subtotal.classList.remove("selected");
@@ -158,6 +160,10 @@ doNothing.addEventListener("click", function () {
 })
 
 subtotal.addEventListener("click", function () {
+
+  if (buttonInformation.isMinusLock === true) {
+    return
+  }
 
   if (timesButton.classList[0] === "selected") {
     timesButton.classList.remove("selected");
@@ -178,6 +184,10 @@ subtotal.addEventListener("click", function () {
 
 total.addEventListener("click", function () {
 
+  if (buttonInformation.isMinusLock === true) {
+    return
+  }
+
   if (timesButton.classList[0] === "selected") {
     timesButton.classList.remove("selected");
     buttonInformation = {
@@ -196,6 +206,11 @@ total.addEventListener("click", function () {
 })
 
 minus.addEventListener("click", function () {
+
+  if (buttonInformation.isMinusLock === true) {
+    return
+  }
+
   checkIfIsClicked(minus);
   total.classList.remove("selected");
   subtotal.classList.remove("selected");
@@ -203,8 +218,18 @@ minus.addEventListener("click", function () {
 })
 
 minusLock.addEventListener("click", function () {
-  checkIfIsClicked(minusLock);
-  console.log(buttonInformation);
+  let whichButton = buttonInformation.whichButton;
+  let isMinusLock = buttonInformation.isMinusLock;
+
+  if (whichButton === "minus" && isMinusLock === false) {
+    isMinusLock = true;
+    minusLock.classList.toggle("selected");
+  } else {
+    isMinusLock = false;
+    minusLock.classList.remove("selected");
+  }
+
+  buttonInformation.isMinusLock = isMinusLock;
 })
 
 timesButton.addEventListener("click", function () {
