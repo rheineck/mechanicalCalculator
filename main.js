@@ -54,6 +54,9 @@ function addToTable(value, symbol) {
       <td id="symbolRow">${symbol}</td>
   `;
   tr.classList.add("stack");
+  if (symbol === "-") {
+    tr.classList.add("negativeNumber")
+  }
   paperStack.appendChild(tr);
 }
 
@@ -245,6 +248,7 @@ enterButton.addEventListener("click", function () {
   let whichButton = buttonInformation.whichButton;
   let clickedButton = buttonInformation.clickedButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
+  let isMinusLock = buttonInformation.isMinusLock;
 
   if (timesClickedEnterButton === 1) {
     stack.splice(stack[0], 1)
@@ -282,6 +286,12 @@ enterButton.addEventListener("click", function () {
     addToTable(-negativeNumber, buttonSymbol);
     negativeNumber = 0;
     inputNumber.value = "";
+    resultRegister = calculate(stack);
+  } else if (whichButton === "timesButton" && clickedButton === true && isMinusLock === true) {
+    negativeNumber = - parseInt(inputNumber.value);
+    stack.push(negativeNumber);
+    addToTable(-negativeNumber, "-");
+    negativeNumber = 0;
     resultRegister = calculate(stack);
   } else if (whichButton === "timesButton" && clickedButton === true) {
     lastNumber = parseInt(inputNumber.value);
