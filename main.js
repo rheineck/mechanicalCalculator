@@ -297,7 +297,7 @@ enterButton.addEventListener("click", function () {
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToTable(lastNumber, buttonSymbol);
-    lastNumber = 0;
+    //lastNumber = 0;
     resultRegister = calculate(stack);
   }
 })

@@ -306,6 +306,10 @@ input {
   background: var(--button-hover-black);
 }
 
+.timesButton .selected {
+  background: var(--button-hover-black);
+}
+
 .hide {
   display: none;
 }
