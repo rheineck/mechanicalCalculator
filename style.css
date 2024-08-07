@@ -307,7 +307,7 @@ input {
 }
 
 .timesButton .selected {
-  background: var(--button-hover-black);
+  background: var(--button-hover);
 }
 
 .hide {
