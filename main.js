@@ -179,14 +179,15 @@ subtotal.addEventListener("click", function () {
   if (buttonInformation.isMinusLock === true) {
     return
   }
-
+  console.log(buttonInformation)
   if (timesButton.classList[0] === "selected") {
-    timesButton.classList.remove("selected");
+    //timesButton.classList.remove("selected");
+
     buttonInformation = {
       clickedButton: true,
       whichButton: "subtotal",
       buttonSymbol: "&",
-      isTimesButton: false
+      //isTimesButton: false
     };
   } else {
     checkIfIsClicked(subtotal);
@@ -261,7 +262,7 @@ enterButton.addEventListener("click", function () {
   let clickedButton = buttonInformation.clickedButton;
   let buttonSymbol = buttonInformation.buttonSymbol;
   let isMinusLock = buttonInformation.isMinusLock;
-  let isTimesButton = buttonInformation.isTimesButto;
+  let isTimesButton = buttonInformation.isTimesButton;
 
   if (timesClickedEnterButton === 1) {
     stack.splice(stack[0], 1)
@@ -279,9 +280,15 @@ enterButton.addEventListener("click", function () {
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "subtotal" && clickedButton === true) {
-    subtotalOperations(subtotal);
-    checkIfIsClicked(subtotal);
-    addToTable(resultRegister, buttonSymbol);
+    //subtotalOperations(subtotal);
+    console.log(buttonInformation);
+    if (isTimesButton === true) {
+      checkIfIsClicked(subtotal);
+      addToTable(resultRegister, buttonSymbol);
+    } else {
+      checkIfIsClicked(subtotal);
+      addToTable(resultRegister, buttonSymbol);
+    }
   } else if (whichButton === "doNothing" && clickedButton === true) {
     checkIfIsClicked(doNothing);
     nothingRegister = inputNumber.value;
@@ -308,6 +315,7 @@ enterButton.addEventListener("click", function () {
     negativeNumber = 0;
     resultRegister = calculate(stack);
   } else if (whichButton === "timesButton" && clickedButton === true) {
+    console.log(buttonInformation)
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToTable(lastNumber, buttonSymbol);
