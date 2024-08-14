@@ -71,6 +71,10 @@ function checkIfIsClicked(button) {
   let isTimesButton = buttonInformation.isTimesButton;
   let isMinusLock = buttonInformation.isMinusLock;
 
+  if (isTimesButton === true && whichButton === "subtotal") {
+    return
+  }
+
   if (clickedButton) {
     clickedButton = false;
   } else {
@@ -108,18 +112,6 @@ function checkIfIsClicked(button) {
   buttonInformation.buttonSymbol = buttonSymbol;
   buttonInformation.isTimesButton = isTimesButton;
   buttonInformation.isMinusLock = isMinusLock;
-}
-
-function subtotalOperations(subtotal) {
-  let clickedButton = buttonInformation.clickedButton;
-  let whichButton = buttonInformation.whichButton;
-  let buttonSymbol = buttonInformation.buttonSymbol;
-  let isTimesButton = buttonInformation.isTimesButton;
-  let isMinusLock = buttonInformation.isMinusLock;
-
-  if (whichButton === timesButton && isTimesButton) {
-    subtotal.classList.add("selected");
-  }
 }
 
 function addToRegister(value, stack) {
@@ -179,18 +171,19 @@ subtotal.addEventListener("click", function () {
   if (buttonInformation.isMinusLock === true) {
     return
   }
-  console.log(buttonInformation)
-  if (timesButton.classList[0] === "selected") {
-    //timesButton.classList.remove("selected");
 
-    buttonInformation = {
-      clickedButton: true,
-      whichButton: "subtotal",
-      buttonSymbol: "&",
-      //isTimesButton: false
-    };
-  } else {
-    checkIfIsClicked(subtotal);
+  if (buttonInformation.isTimesButton === true) {
+    if (timesButton.classList[0] === "selected") {
+      //timesButton.classList.remove("selected");
+      buttonInformation = {
+        clickedButton: true,
+        whichButton: "subtotal",
+        buttonSymbol: "&",
+        isTimesButton: true
+      };
+    } else {
+      checkIfIsClicked(subtotal);
+    }
   }
 
   doNothing.classList.remove("selected");
@@ -280,8 +273,6 @@ enterButton.addEventListener("click", function () {
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "subtotal" && clickedButton === true) {
-    //subtotalOperations(subtotal);
-    console.log(buttonInformation);
     if (isTimesButton === true) {
       checkIfIsClicked(subtotal);
       addToTable(resultRegister, buttonSymbol);
@@ -315,7 +306,6 @@ enterButton.addEventListener("click", function () {
     negativeNumber = 0;
     resultRegister = calculate(stack);
   } else if (whichButton === "timesButton" && clickedButton === true) {
-    console.log(buttonInformation)
     lastNumber = parseInt(inputNumber.value);
     stack.push(lastNumber);
     addToTable(lastNumber, buttonSymbol);
