@@ -206,6 +206,7 @@ total.addEventListener("click", function () {
 
   if (timesButton.classList[0] === "selected") {
     timesButton.classList.remove("selected");
+    total.classList.add("selected");
     buttonInformation = {
       clickedButton: true,
       whichButton: "total",
@@ -280,13 +281,8 @@ enterButton.addEventListener("click", function () {
     inputNumber.value = "";
     resultRegister = calculate(stack);
   } else if (whichButton === "subtotal" && clickedButton === true) {
-    if (isTimesButton === true) {
-      checkIfIsClicked(subtotal);
-      addToTable(resultRegister, buttonSymbol);
-    } else {
-      checkIfIsClicked(subtotal);
-      addToTable(resultRegister, buttonSymbol);
-    }
+    checkIfIsClicked(subtotal);
+    addToTable(resultRegister, buttonSymbol);
   } else if (whichButton === "doNothing" && clickedButton === true) {
     checkIfIsClicked(doNothing);
     nothingRegister = inputNumber.value;
