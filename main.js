@@ -181,16 +181,15 @@ subtotal.addEventListener("click", function () {
   if (buttonInformation.isTimesButton === true) {
     if (timesButton.classList[0] === "selected") {
       subtotal.classList.add("selected");
-      //timesButton.classList.remove("selected");
       buttonInformation = {
         clickedButton: true,
         whichButton: "subtotal",
         buttonSymbol: "&",
         isTimesButton: true
       };
-    } else {
-      checkIfIsClicked(subtotal);
     }
+  } else {
+    checkIfIsClicked(subtotal);
   }
 
   doNothing.classList.remove("selected");
@@ -237,6 +236,7 @@ minus.addEventListener("click", function () {
 minusLock.addEventListener("click", function () {
   let whichButton = buttonInformation.whichButton;
   let isMinusLock = buttonInformation.isMinusLock;
+  let isTimesButton = buttonInformation.isTimesButton;
 
   if (whichButton === "minus" && isMinusLock === false) {
     isMinusLock = true;
